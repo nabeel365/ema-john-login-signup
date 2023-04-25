@@ -22,8 +22,9 @@ const {user, logOut} = useContext(AuthContext)
                 <Link to="/orders">Orders</Link>
                 <Link to="/inventory">Inventory</Link>
                 <Link to="/login">Login</Link>
-                <Link to="/sign-up">Sign Up</Link>
-                {user && <span>Welcome {user.username} <button onClick={handleSignOut}>Sign Out</button> </span> }
+                <Link to="/sign-up">Sign Up</Link> 
+                &nbsp; &nbsp; &nbsp;
+                {user && <span className='welcome'>Welcome {user.username} <Link to="/login"><button onClick={handleSignOut} className='sign-out'>Sign Out</button></Link> </span> }
             </div>
         </nav>
     );

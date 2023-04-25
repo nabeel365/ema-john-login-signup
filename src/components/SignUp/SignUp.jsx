@@ -2,21 +2,23 @@ import React, { useContext, useState } from 'react';
 import './signup.css'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
+import { sendEmailVerification } from 'firebase/auth';
 const SignUp = () => {
     const [error, setError] = useState('');
 
     // context api .. 
-    const {user} = useContext(AuthContext);
+    const {user, createUser} = useContext(AuthContext);
 
 
     const handleSignUp = event => {
         event.preventDefault();
 
         const form = event.target;
+        const username = form.username.value
         const email = form.email.value;
         const password = form.password.value;
         const confirm = form.confirm.value;     // value is the assigned name ..
-        console.log(email, password, confirm);
+        console.log(email, password, confirm, username);
 
         if(password !== confirm){
             setError('Password does not match')
@@ -26,7 +28,32 @@ const SignUp = () => {
             setError('Password must be 6 character long')
         } 
 
+        // create user
+        createUser(username, email, password)
+        .then(result => {
+            const loggedUser = result.user;
+            console.log(loggedUser);
+            form.reset();
+
+            // 
+            // sendVerificationEmail(result.user);
+
+        })
+        .catch(error => {
+            console.log(error);
+        })
+
     }
+
+                 
+ // send verification email
+//  const sendVerificationEmail = (user) => {
+//     sendEmailVerification(user)
+//     .then(result => {
+//         console.log(result);
+//         alert('please  verify your email')
+//     })
+// }
 
     return (
         <div>

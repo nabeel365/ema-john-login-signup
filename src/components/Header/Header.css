@@ -16,3 +16,11 @@ nav.header a{
 nav.header a:hover{
     color: orange;
 }
+
+.welcome{
+    color: #FFFFFF;
+}
+
+.sign-out{
+    width: fit-content;
+}
